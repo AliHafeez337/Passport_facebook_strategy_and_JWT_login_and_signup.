@@ -29,7 +29,7 @@ var UserDetail = new Schema({
     },
     password: {
         type: String,
-        require: true,
+        require: false,
         minlength: 6
     }
 });
@@ -67,6 +67,15 @@ UserDetail.statics.findByCredentials = function (email, password) {
     });
 };
 
+UserDetail.statics.findByEmail = function (email) {
+  var User = this;
+
+  return User.findOne({email}).then((user) => {
+    // console.log(user)
+    return user;
+  });
+};
+
 UserDetail.pre('save', function (next) {
     var user = this;
     console.log('called');
@@ -83,6 +92,6 @@ UserDetail.pre('save', function (next) {
     }
 });
 
-const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
+var User = mongoose.model('User', UserDetail);
 
-module.exports = {UserDetails}
+module.exports = {User}

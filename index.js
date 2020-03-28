@@ -14,13 +14,14 @@ app.listen(port , () => console.log('App listening on port ' + port));
 const passport = require('passport');
 app.use(passport.initialize());
 
-/* PASSPORT LOCAL AUTHENTICATION */
+/* PASSPORT FACEBOOK AUTHENTICATION */
 
-var {Local} = require('./passport/local');
+require('./passport/facebook');
 
 /* Routes */
 
-var userRoutes = require('./routes/user.router');
+var userRoutes = require('./routes/user');
+// var userRoutes = require('./routes/user.router');
 
 app.use("/", userRoutes);
 app.get('/:file', function(req, res){
